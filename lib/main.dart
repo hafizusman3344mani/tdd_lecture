@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:tdd_lecture/core/constants/end_points.dart';
+import 'package:tdd_lecture/core/networking/dio_client.dart';
 
-void main() {
+final sl = GetIt.instance;
+void main()async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  sl.registerLazySingleton<DioClient>(
+          () => DioClient(baseUrl: EndPoints.baseUrl));
+  await sl.allReady();
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
